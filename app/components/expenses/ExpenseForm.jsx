@@ -2,7 +2,7 @@ import {
   Form, 
   Link, 
   useActionData, 
-  useLoaderData, 
+  // useLoaderData, 
   useMatches, 
   useParams, 
   useTransition as useNavigation 
@@ -20,7 +20,13 @@ function ExpenseForm() {
   const expenseData = expenses.find(
     (expense) => expense.id === params.id 
   );
+
   const navigation = useNavigation();
+
+  if (params.id && !expenseData) {
+    // throw new Response();
+    return <p>Invalid expense id.</p>;
+  }
 
   const defaultValues = expenseData ? {
     title: expenseData.title,
@@ -48,7 +54,7 @@ function ExpenseForm() {
 
   return (
     <Form 
-      method="post" 
+      method={expenseData ? 'patch' : 'post'}
       className="form" 
       id="expense-form"
       // onSubmit={submitHandler}
