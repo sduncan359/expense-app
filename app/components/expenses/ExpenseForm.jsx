@@ -1,11 +1,11 @@
-import { 
-  Form, 
-  Link, 
-  useActionData, 
+import {
+  Form,
+  Link,
+  useActionData,
   // useLoaderData, 
-  useMatches, 
-  useParams, 
-  useTransition as useNavigation 
+  useMatches,
+  useParams,
+  useTransition as useNavigation
 } from '@remix-run/react';
 
 function ExpenseForm() {
@@ -18,7 +18,7 @@ function ExpenseForm() {
   ).data;
   const params = useParams();
   const expenseData = expenses.find(
-    (expense) => expense.id === params.id 
+    (expense) => expense.id === params.id
   );
 
   const navigation = useNavigation();
@@ -33,9 +33,9 @@ function ExpenseForm() {
     amount: expenseData.amount,
     date: expenseData.date
   } : {
-      title: '',
-      amount: '',
-      date: ''
+    title: '',
+    amount: '',
+    date: ''
   };
 
   const isSubmitting = navigation.state !== 'idle';
@@ -53,20 +53,20 @@ function ExpenseForm() {
   // }
 
   return (
-    <Form 
+    <Form
       method={expenseData ? 'patch' : 'post'}
-      className="form" 
+      className="form"
       id="expense-form"
-      // onSubmit={submitHandler}
-    >     
+    // onSubmit={submitHandler}
+    >
       <p>
         <label htmlFor="title">Expense Title</label>
-        <input 
-          type="text" 
-          id="title" 
-          name="title" 
-          required 
-          maxLength={30} 
+        <input
+          type="text"
+          id="title"
+          name="title"
+          required
+          maxLength={30}
           defaultValue={defaultValues.title}
         />
       </p>
@@ -86,12 +86,12 @@ function ExpenseForm() {
         </p>
         <p>
           <label htmlFor="date">Date</label>
-          <input 
-            type="date" 
-            id="date" 
-            name="date" 
-            max={today} 
-            required 
+          <input
+            type="date"
+            id="date"
+            name="date"
+            max={today}
+            required
             defaultValue={defaultValues.date ? defaultValues.date.slice(0, 10) : ''}
           />
         </p>

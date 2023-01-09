@@ -2,7 +2,7 @@ import { Form, Link, useFetcher, useSubmit } from '@remix-run/react';
 
 function ExpenseListItem({ id, title, amount }) {
   // const submit = useSubmit();
-  const fetcher = useFetcher();  
+  const fetcher = useFetcher();
   function deleteExpenseItemHandler() {
     const proceed = confirm('Are you sure? Do you want to delete this item?');
     // submit(null, {
@@ -11,7 +11,7 @@ function ExpenseListItem({ id, title, amount }) {
     // });
     if (!proceed) {
       return;
-    } 
+    }
     fetcher.submit(null, {
       method: 'delete',
       action: `/expenses/${id}`
@@ -34,8 +34,8 @@ function ExpenseListItem({ id, title, amount }) {
         <button onClick={deleteExpenseItemHandler}>Delete</button>
         {/* <Form method='delete' action={`/expenses/${id}`}> 
           <button>Delete</button>
-        </Form> */}       
-        <Link to={id}>Edit</Link>        
+        </Form> */}
+        <Link to={id}>Edit</Link>
       </menu>
     </article>
   );
