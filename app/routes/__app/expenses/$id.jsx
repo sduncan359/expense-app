@@ -10,7 +10,7 @@ import { validateExpenseInput } from '~/data/validation.server';
 // import { getExpense } from '~/data/expenses.server';
 
 export default function UpdateExpensesPage() {
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   function closeHandler() {
     // navigate programmatically
@@ -31,9 +31,9 @@ export default function UpdateExpensesPage() {
 //   return expense;
 // }
 
-export async function action({params, request}) {
+export async function action({ params, request }) {
   const expenseId = params.id;
-  
+
   if (request.method === 'PATCH') {
     const formData = await request.formData();
     const expenseData = Object.fromEntries(formData);
@@ -50,5 +50,13 @@ export async function action({params, request}) {
   } else if (request.method === 'DELETE') {
     await deleteExpense(expenseId);
     return redirect('/expenses');
+  }
+}
+
+export function meta({ params, location, data, parentsData }) {
+  const expense = parentsData['routes/__app/expenses'].find(expense => expense.id === params.id);
+  return {
+    title: expense.title,
+    description: 'Update expense.'
   }
 }
